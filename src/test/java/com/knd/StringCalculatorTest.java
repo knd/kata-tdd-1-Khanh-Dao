@@ -20,4 +20,11 @@ public class StringCalculatorTest {
         assertThat(sum).isEqualTo(1);
     }
     
+    @Test
+    public void testCalculatorSummationForSingleNumberString1() {
+        StringCalculator calculator = new StringCalculator();
+        int sum = calculator.add("2");
+        assertThat(sum).isEqualTo(2);
+    }
+    
 }
