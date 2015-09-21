@@ -49,13 +49,23 @@ public class StringCalculatorTest {
         int sum = calculator.add("1\n2,3");
         assertThat(sum).isEqualTo(6);
     }
+    
+    @Test
+    public void testCalculatorSummationForOnlyNewLineDelimitedNumberString() {
+        int sum = calculator.add("1\n2\n3");
+        assertThat(sum).isEqualTo(6);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
         for (int i = 0; i < amountOfNumbers; i++) {
             numbers.append(String.valueOf(i));
             if (i < amountOfNumbers - 1) { // not next to last element
-                numbers.append(StringCalculator.COMMA_DELIMETER);
+                if (i % 2 == 0) {
+                    numbers.append(StringCalculator.COMMA_DELIMETER);
+                } else {
+                    numbers.append(StringCalculator.NEW_LINE_DELIMETER);
+                }
             }
         }
         return numbers.toString();
