@@ -26,4 +26,10 @@ public class StringCalculatorTest {
         assertThat(sum).isEqualTo(2);
     }
     
+    @Test
+    public void testCalculatorSummationForTwoNumbersString() {
+        int sum = calculator.add("1,2");
+        assertThat(sum).isEqualTo(3);
+    }
+    
 }
