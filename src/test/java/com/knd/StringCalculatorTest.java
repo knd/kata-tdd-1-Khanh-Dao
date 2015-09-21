@@ -43,12 +43,18 @@ public class StringCalculatorTest {
         int sum = calculator.add(numbers.toString());
         assertThat(sum).isEqualTo(expectedSum);
     }
+    
+    @Test
+    public void testCalculatorSummationForMixedNewLineAndCommaDelimetedNumberString() {
+        int sum = calculator.add("1\n2,3");
+        assertThat(sum).isEqualTo(6);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
         for (int i = 0; i < amountOfNumbers; i++) {
             numbers.append(String.valueOf(i));
-            if (i < amountOfNumbers - 1) {
+            if (i < amountOfNumbers - 1) { // not next to last element
                 numbers.append(StringCalculator.NUMBER_DELIMETER);
             }
         }
