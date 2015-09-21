@@ -2,8 +2,7 @@ package com.knd;
 
 public class StringCalculator {
 
-    public int add(String string) {
-        // TODO Auto-generated method stub
+    public int add(String numbers) {
         return 0;
     }
 
