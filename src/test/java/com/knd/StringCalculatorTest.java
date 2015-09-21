@@ -55,7 +55,7 @@ public class StringCalculatorTest {
         for (int i = 0; i < amountOfNumbers; i++) {
             numbers.append(String.valueOf(i));
             if (i < amountOfNumbers - 1) { // not next to last element
-                numbers.append(StringCalculator.NUMBER_DELIMETER);
+                numbers.append(StringCalculator.COMMA_DELIMETER);
             }
         }
         return numbers.toString();
