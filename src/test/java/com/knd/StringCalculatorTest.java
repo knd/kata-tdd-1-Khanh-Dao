@@ -13,4 +13,11 @@ public class StringCalculatorTest {
         assertThat(sum).isEqualTo(0);
     }
     
+    @Test
+    public void testCalculatorSummationForSingleNumberString() {
+        StringCalculator calculator = new StringCalculator();
+        int sum = calculator.add("1");
+        assertThat(sum).isEqualTo(1);
+    }
+    
 }
