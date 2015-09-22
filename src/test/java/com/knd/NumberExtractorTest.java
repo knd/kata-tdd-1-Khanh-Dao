@@ -24,4 +24,9 @@ public class NumberExtractorTest {
         assertThat(extractor.getSpecifiedDelimiter()).isEqualTo(";");
     }
 
+    @Test
+    public void testExtractorReturnsDelimiterIfNumberStringHasSpecifiedDelimiter1() {
+        NumberExtractor extractor = new NumberExtractor("//*\n1;2");
+        assertThat(extractor.getSpecifiedDelimiter()).isEqualTo("*");
+    }
 }
