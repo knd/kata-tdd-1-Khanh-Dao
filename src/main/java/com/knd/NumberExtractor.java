@@ -22,4 +22,8 @@ public class NumberExtractor {
         return null;
     }
 
+    public String getNumberString() {
+        return numbers.substring(SPECIFIED_DELIMITER_INDEX + 2);
+    }
+
 }
