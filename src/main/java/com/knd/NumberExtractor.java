@@ -1,7 +1,11 @@
 package com.knd;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NumberExtractor {
 
@@ -28,6 +32,19 @@ public class NumberExtractor {
             }
         }
         return null;
+    }
+    
+    public Set<String> getSpecifiedDelimiters() {
+        Set<String> delimiters = new HashSet<String>();
+        if (hasSpecifiedDelimiter()) {
+            String firstLine = numbers.split("\n")[0];
+            Pattern pattern = Pattern.compile("\\[(.+?)\\]");
+            Matcher matcher = pattern.matcher(firstLine);
+            while (matcher.find()) {
+                delimiters.add(matcher.group(1));
+            }
+        }
+        return delimiters;
     }
 
     public String getNumberString() {
