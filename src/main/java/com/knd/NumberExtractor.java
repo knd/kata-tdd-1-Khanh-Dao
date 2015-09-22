@@ -37,7 +37,7 @@ public class NumberExtractor {
         List<Integer> numbers = new LinkedList<Integer>();
         if (!getNumberString().isEmpty()) {
             String delimiterPattern = hasSpecifiedDelimiter() ? getSpecifiedDelimiter() : StringCalculator.DELIMITER_DEFAULT_PATTERN;
-            for (String number : getNumberString().split("\\" + delimiterPattern)) {
+            for (String number : getNumberString().split(getEscapedPattern(delimiterPattern))) {
                 int num = Integer.valueOf(number);
                 if (num < 1001) {
                     numbers.add(num);
@@ -55,6 +55,10 @@ public class NumberExtractor {
             }
         }
         return negativeNumbers;
+    }
+    
+    private String getEscapedPattern(String pattern) {
+        return "\\" + pattern;
     }
 
 }
