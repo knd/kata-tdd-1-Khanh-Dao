@@ -40,7 +40,8 @@ public class NumberExtractor {
     public List<Integer> getNumbersSmallerThan1001() {
         List<Integer> numbers = new LinkedList<Integer>();
         if (!getNumberString().isEmpty()) {
-            String delimiterPattern = hasSpecifiedDelimiter() ? getEscapedPattern(getSpecifiedDelimiter()) : StringCalculator.DELIMITER_DEFAULT_PATTERN;
+            String delimiterPattern =
+                    hasSpecifiedDelimiter() ? getEscapedPattern(getSpecifiedDelimiter()) : StringCalculator.DELIMITER_DEFAULT_PATTERN;
             for (String number : getNumberString().split(delimiterPattern)) {
                 int num = Integer.valueOf(number);
                 if (num < 1001) {
