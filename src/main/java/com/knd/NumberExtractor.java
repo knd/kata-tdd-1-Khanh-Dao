@@ -16,7 +16,10 @@ public class NumberExtractor {
     }
 
     public String getSpecifiedDelimiter() {
-        return String.valueOf(numbers.charAt(SPECIFIED_DELIMITER_INDEX));
+        if (hasSpecifiedDelimiter()) {
+            return String.valueOf(numbers.charAt(SPECIFIED_DELIMITER_INDEX));
+        }
+        return null;
     }
 
 }
