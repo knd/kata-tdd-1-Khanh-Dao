@@ -42,4 +42,10 @@ public class NumberExtractorTest {
         assertThat(extractor.getNumberString()).isEqualTo("1;2");
     }
     
+    @Test
+    public void testExtractorReturnsNumberStringPart1() {
+        NumberExtractor extractor = new NumberExtractor("1\n2;3");
+        assertThat(extractor.getNumberString()).isEqualTo("1\n2;3");
+    }
+    
 }
