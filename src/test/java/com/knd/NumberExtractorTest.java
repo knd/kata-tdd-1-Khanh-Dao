@@ -2,6 +2,8 @@ package com.knd;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class NumberExtractorTest {
@@ -57,7 +59,9 @@ public class NumberExtractorTest {
     @Test
     public void testExtractorReturnsListOfNegativeNumbers() {
         NumberExtractor extractor = new NumberExtractor("-1");
-        assertThat(extractor.getNegativeNumbers()).hasSize(1);
+        List<Integer> negativeNumbers = extractor.getNegativeNumbers();
+        assertThat(negativeNumbers).hasSize(1);
+        assertThat(negativeNumbers.get(0)).isEqualTo(-1);
     }
     
 }
