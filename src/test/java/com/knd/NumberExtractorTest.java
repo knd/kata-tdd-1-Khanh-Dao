@@ -155,4 +155,11 @@ public class NumberExtractorTest {
         assertThat(numbers).containsOnly(1, 2, 3);
     }
     
+    @Test
+    public void testExtractorReturnsListOfNumbersWithDifferentSpecifiedDelimiters2() {
+        NumberExtractor extractor = new NumberExtractor("//[%,,*][%,*][;;][%,**][**]\n1%,,*2%,*3;;4%,**5**6");
+        List<Integer> numbers = extractor.getNumbers1();
+        assertThat(numbers).containsOnly(1, 2, 3, 4, 5, 6);
+    }
+    
 }
