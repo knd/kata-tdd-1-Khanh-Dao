@@ -53,6 +53,26 @@ public class NumberExtractor {
         }
         return numbers;
     }
+    
+    public List<Integer> getNumbers1() {
+        List<Integer> numbers = new LinkedList<Integer>();
+        if (!getNumberString().isEmpty()) {
+            String delimiterPattern = "";
+            if (hasSpecifiedDelimiter()) {
+                Set<String> delimiters = getSpecifiedDelimiters();
+                delimiterPattern = getDelimiterPattern(delimiters);
+            } else {
+                delimiterPattern = StringCalculator.DELIMITER_DEFAULT_PATTERN;
+            }
+            for (String number : getNumberString().split(delimiterPattern)) {
+                int num = Integer.valueOf(number);
+                if (num < 1001) {
+                    numbers.add(num);
+                }
+            }
+        }
+        return numbers;
+    }
 
     public List<Integer> getNumbersSmallerThan1001() {
         List<Integer> numbers = new LinkedList<Integer>();
@@ -77,6 +97,15 @@ public class NumberExtractor {
             }
         }
         return negativeNumbers;
+    }
+    
+    private String getDelimiterPattern(Set<String> delimiters) {
+        StringBuffer delimiterPattern = new StringBuffer();
+        for (String delimiter : delimiters) {
+            delimiterPattern.append(getEscapedPattern(delimiter));
+            delimiterPattern.append("|");
+        }
+        return delimiterPattern.substring(0, delimiterPattern.length() - 1);
     }
 
     private String getEscapedPattern(String pattern) {
