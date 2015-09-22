@@ -98,4 +98,11 @@ public class NumberExtractorTest {
         assertThat(numbers).containsOnly(1, 2, 3);
     }
     
+    @Test 
+    public void testExtractorReturnsListOfNumbersWithSpecifiedDelimiterInSquareBrackets() {
+        NumberExtractor extractor = new NumberExtractor("//[*]\n1*2*3");
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
+        assertThat(numbers).containsOnly(1, 2, 3);
+    }
+    
 }
