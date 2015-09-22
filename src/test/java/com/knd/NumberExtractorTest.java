@@ -29,4 +29,10 @@ public class NumberExtractorTest {
         NumberExtractor extractor = new NumberExtractor("//*\n1;2");
         assertThat(extractor.getSpecifiedDelimiter()).isEqualTo("*");
     }
+    
+    @Test
+    public void testExtractorReturnsNullIfNumberStringHasNoSpecifiedDelimiter() {
+        NumberExtractor extractor = new NumberExtractor("1\n2;3");
+        assertThat(extractor.getSpecifiedDelimiter()).isNull();
+    }
 }
