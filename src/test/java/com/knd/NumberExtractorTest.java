@@ -84,4 +84,11 @@ public class NumberExtractorTest {
         assertThat(numbers).isEmpty();
     }
     
+    @Test
+    public void testExtractorReturnsListOfNumbersSmallerThanOrEqualTo1000() {
+        NumberExtractor extractor = new NumberExtractor("1\n1001,2,3");
+        List<Integer> numbers = extractor.getNumbers();
+        assertThat(numbers).containsOnly(1, 2, 3);
+    }
+    
 }
