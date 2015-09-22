@@ -35,9 +35,11 @@ public class NumberExtractor {
 
     public List<Integer> getNumbers() {
         List<Integer> numbers = new LinkedList<Integer>();
-        String delimiterPattern = hasSpecifiedDelimiter() ? getSpecifiedDelimiter() : StringCalculator.DELIMITER_DEFAULT_PATTERN;
-        for (String number : getNumberString().split(delimiterPattern)) {
-            numbers.add(Integer.valueOf(number));
+        if (!getNumberString().isEmpty()) {
+            String delimiterPattern = hasSpecifiedDelimiter() ? getSpecifiedDelimiter() : StringCalculator.DELIMITER_DEFAULT_PATTERN;
+            for (String number : getNumberString().split(delimiterPattern)) {
+                numbers.add(Integer.valueOf(number));
+            }
         }
         return numbers;
     }

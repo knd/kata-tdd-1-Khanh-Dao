@@ -77,4 +77,11 @@ public class NumberExtractorTest {
         assertThat(numbers).containsOnly(-1, -2, 3, -4);
     }
     
+    @Test
+    public void testExtractorReturnsEmptyListOfNumbersForEmptyNumberString() {
+        NumberExtractor extractor = new NumberExtractor("");
+        List<Integer> numbers = extractor.getNumbers();
+        assertThat(numbers).isEmpty();
+    }
+    
 }

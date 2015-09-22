@@ -4,9 +4,12 @@ public class StringCalculator {
 
     public static final String DELIMITER_DEFAULT_PATTERN = ",|\n";
 
-    public int add(String numbers) {
+    public int add(String numbers) throws NegativeValueException {
         NumberExtractor extractor = new NumberExtractor(numbers);
         String numberString = extractor.getNumberString();
+        if (!extractor.getNegativeNumbers().isEmpty()) {
+            throw new NegativeValueException(extractor.getNegativeNumbers());
+        }
         if (numberString.isEmpty()) {
             return 0;
         }

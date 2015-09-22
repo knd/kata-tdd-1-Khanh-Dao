@@ -7,38 +7,38 @@ import java.util.Random;
 import org.junit.Test;
 
 public class StringCalculatorTest {
-    
+
     private static final String COMMA = ",";
     private static final String NEW_LINE = "\n";
 
     StringCalculator calculator = new StringCalculator();
 
     @Test
-    public void testCalculatorSummationToZeroForEmptryString() {
+    public void testCalculatorSummationToZeroForEmptryString() throws NegativeValueException {
         int sum = calculator.add("");
         assertThat(sum).isEqualTo(0);
     }
 
     @Test
-    public void testCalculatorSummationForSingleNumberString() {
+    public void testCalculatorSummationForSingleNumberString() throws NegativeValueException {
         int sum = calculator.add("1");
         assertThat(sum).isEqualTo(1);
     }
 
     @Test
-    public void testCalculatorSummationForSingleNumberString1() {
+    public void testCalculatorSummationForSingleNumberString1() throws NegativeValueException {
         int sum = calculator.add("2");
         assertThat(sum).isEqualTo(2);
     }
 
     @Test
-    public void testCalculatorSummationForTwoNumberString() {
+    public void testCalculatorSummationForTwoNumberString() throws NegativeValueException {
         int sum = calculator.add("1,2");
         assertThat(sum).isEqualTo(3);
     }
 
     @Test
-    public void testCalculatorSummationForUnknownAmountOfNumberString() {
+    public void testCalculatorSummationForUnknownAmountOfNumberString() throws NegativeValueException {
         Random rand = new Random();
         int amountOfNumbers = rand.nextInt(1000); // safe enough to avoid hard code
         String numbers = getNumbersInputString(amountOfNumbers);
@@ -46,34 +46,34 @@ public class StringCalculatorTest {
         int sum = calculator.add(numbers.toString());
         assertThat(sum).isEqualTo(expectedSum);
     }
-    
+
     @Test
-    public void testCalculatorSummationForMixedNewLineAndCommaDelimetedNumberString() {
+    public void testCalculatorSummationForMixedNewLineAndCommaDelimetedNumberString() throws NegativeValueException {
         int sum = calculator.add("1\n2,3");
         assertThat(sum).isEqualTo(6);
     }
-    
+
     @Test
-    public void testCalculatorSummationForOnlyNewLineDelimitedNumberString() {
+    public void testCalculatorSummationForOnlyNewLineDelimitedNumberString() throws NegativeValueException {
         int sum = calculator.add("1\n2\n3");
         assertThat(sum).isEqualTo(6);
     }
-    
+
     @Test
-    public void testCalculatorSummationForSpecifiedDelimiterNumberString() {
+    public void testCalculatorSummationForSpecifiedDelimiterNumberString() throws NegativeValueException {
         int sum = calculator.add("//;\n1;2");
         assertThat(sum).isEqualTo(3);
     }
-    
+
     @Test
-    public void testCalculatorSummationForSpecifiedDelimiterNumberString1() {
+    public void testCalculatorSummationForSpecifiedDelimiterNumberString1() throws NegativeValueException {
         int sum = calculator.add("//:\n1:2");
         assertThat(sum).isEqualTo(3);
     }
-    
-    @Test(expected=NegativeValueException.class)
-    public void testCalculatorSummationForNumberStringWithNegativeValues() {
-        int sum = calculator.add("-1\n2;3");
+
+    @Test(expected = NegativeValueException.class)
+    public void testCalculatorSummationForNumberStringWithNegativeValues() throws NegativeValueException {
+        int sum = calculator.add("-1\n2,3");
     }
 
     private String getNumbersInputString(int amountOfNumbers) {
