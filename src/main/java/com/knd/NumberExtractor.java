@@ -7,7 +7,6 @@ public class NumberExtractor {
 
     private static final String DELIMITER_PREFIX = "//";
     private static final int SPECIFIED_DELIMITER_INDEX = 2;
-    private static final int NEW_LINE_STR_LENGTH = 2;
 
     private String numbers;
 
