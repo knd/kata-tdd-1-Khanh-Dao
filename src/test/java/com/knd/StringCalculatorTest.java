@@ -55,6 +55,12 @@ public class StringCalculatorTest {
         int sum = calculator.add("1\n2\n3");
         assertThat(sum).isEqualTo(6);
     }
+    
+    @Test
+    public void testCalculatorSummationForSpecifiedDelimiterNumberString() {
+        int sum = calculator.add("//;\n1;2");
+        assertThat(sum).isEqualTo(3);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
