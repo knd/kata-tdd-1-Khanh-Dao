@@ -7,7 +7,7 @@ import org.junit.Test;
 public class NumberExtractorTest {
 
     @Test
-    public void testExtractorReturnsTrueIfNumberHasSpecifiedDelimiter() {
+    public void testExtractorReturnsTrueIfNumberStringHasSpecifiedDelimiter() {
         NumberExtractor extractor = new NumberExtractor("//;\n1;2");
         assertThat(extractor.hasSpecifiedDelimiter()).isTrue();
     }
