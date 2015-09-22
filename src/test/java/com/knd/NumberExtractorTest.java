@@ -78,6 +78,13 @@ public class NumberExtractorTest {
     }
     
     @Test
+    public void testExtractorReturnsListOfNumbers1() {
+        NumberExtractor extractor = new NumberExtractor("//*\n-1*-2*3*-4");
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
+        assertThat(numbers).containsOnly(-1, -2, 3, -4);
+    }
+    
+    @Test
     public void testExtractorReturnsEmptyListOfNumbersForEmptyNumberString() {
         NumberExtractor extractor = new NumberExtractor("");
         List<Integer> numbers = extractor.getNumbersSmallerThan1001();
