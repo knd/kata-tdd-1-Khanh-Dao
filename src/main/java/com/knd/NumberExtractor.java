@@ -41,7 +41,7 @@ public class NumberExtractor {
         }
         return numbers;
     }
-    
+
     public List<Integer> getNegativeNumbers() {
         List<Integer> negativeNumbers = new LinkedList<Integer>();
         for (Integer number : getNumbers()) {

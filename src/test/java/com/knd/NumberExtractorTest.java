@@ -60,8 +60,21 @@ public class NumberExtractorTest {
     public void testExtractorReturnsListOfNegativeNumbers() {
         NumberExtractor extractor = new NumberExtractor("-1");
         List<Integer> negativeNumbers = extractor.getNegativeNumbers();
-        assertThat(negativeNumbers).hasSize(1);
-        assertThat(negativeNumbers.get(0)).isEqualTo(-1);
+        assertThat(negativeNumbers).containsOnly(-1);
+    }
+    
+    @Test
+    public void testExtractorReturnsListOfNegativeNumbers1() {
+        NumberExtractor extractor = new NumberExtractor("-1\n-2,-3,4");
+        List<Integer> negativeNumbers = extractor.getNegativeNumbers();
+        assertThat(negativeNumbers).containsOnly(-1, -2, -3);
+    }
+    
+    @Test 
+    public void testExtractorReturnsListOfNumbers() {
+        NumberExtractor extractor = new NumberExtractor("//;\n-1;-2;3;-4");
+        List<Integer> numbers = extractor.getNumbers();
+        assertThat(numbers).containsOnly(-1, -2, 3, -4);
     }
     
 }
