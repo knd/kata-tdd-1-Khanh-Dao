@@ -15,7 +15,7 @@ public class NumberExtractor {
     }
 
     public String getSpecifiedDelimiter() {
-        return ";";
+        return String.valueOf(numbers.charAt(2));
     }
 
 }
