@@ -4,7 +4,7 @@ import java.util.List;
 
 public class StringCalculator {
 
-    public static final String DELIMITER_DEFAULT_PATTERN = ",|\n";
+    public static final String DEFAULT_SPLIT_PATTERN = ",|\n";
 
     public int add(String numbers) throws NegativeValueException {
         NumberExtractor extractor = new NumberExtractor(numbers);

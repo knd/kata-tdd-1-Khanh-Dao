@@ -24,19 +24,19 @@ public class NumberExtractorTest {
     @Test
     public void testExtractorReturnsDelimiterIfNumberStringHasSpecifiedDelimiter() {
         NumberExtractor extractor = new NumberExtractor("//;\n1;2");
-        assertThat(extractor.getSpecifiedDelimiter()).isEqualTo(";");
+        assertThat(extractor.getSpecifiedDelimiters()).containsOnly(";");
     }
 
     @Test
     public void testExtractorReturnsDelimiterIfNumberStringHasSpecifiedDelimiter1() {
         NumberExtractor extractor = new NumberExtractor("//*\n1;2");
-        assertThat(extractor.getSpecifiedDelimiter()).isEqualTo("*");
+        assertThat(extractor.getSpecifiedDelimiters()).containsOnly("*");
     }
     
     @Test
     public void testExtractorReturnsNullIfNumberStringHasNoSpecifiedDelimiter() {
         NumberExtractor extractor = new NumberExtractor("1\n2;3");
-        assertThat(extractor.getSpecifiedDelimiter()).isNull();
+        assertThat(extractor.getSpecifiedDelimiters()).isEmpty();
     }
     
     @Test

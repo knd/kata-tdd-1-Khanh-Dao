@@ -9,7 +9,11 @@ import java.util.regex.Pattern;
 
 public class NumberExtractor {
 
-    private static final String DELIMITER_PREFIX = "//";
+    private static final String DELIMITER_SPECIFICATION_PREFIX = "//";
+    private static final String DELIMITER_SPECIFICATION_EXTENDED_PREFIX = "//[";
+    private static final String DELIMITER_SPECFICIATION_EXTENDED_PATTERN = "\\[(.+?)\\]";
+    private static final String NEW_LINE = "\n";
+    private static final String ESCAPE_CHARACTER_PATTERN = "\\";
 
     private String numbers;
 
@@ -18,61 +22,24 @@ public class NumberExtractor {
     }
 
     public boolean hasSpecifiedDelimiter() {
-        return numbers.startsWith(DELIMITER_PREFIX);
-    }
-
-    public String getSpecifiedDelimiter() {
-        if (hasSpecifiedDelimiter()) {
-            String firstLine = numbers.split("\n")[0];
-            if (firstLine.startsWith("//[")) {
-                return firstLine.substring(3, firstLine.length() - 1);
-            }
-            if (firstLine.startsWith("//")) {
-                return firstLine.substring(DELIMITER_PREFIX.length());
-            }
-        }
-        return null;
+        return numbers.startsWith(DELIMITER_SPECIFICATION_PREFIX);
     }
     
     public Set<String> getSpecifiedDelimiters() {
         Set<String> delimiters = new HashSet<String>();
         if (hasSpecifiedDelimiter()) {
-            String firstLine = numbers.split("\n")[0];
-            Pattern pattern = Pattern.compile("\\[(.+?)\\]");
-            Matcher matcher = pattern.matcher(firstLine);
-            while (matcher.find()) {
-                delimiters.add(matcher.group(1));
-            }
-            if (delimiters.isEmpty()) {
-                delimiters.add(firstLine.substring(DELIMITER_PREFIX.length(), firstLine.length()));
-            }
+            String firstLine = numbers.split(NEW_LINE)[0];
+            delimiters = getDelimiters(firstLine);
         }
         return delimiters;
-    }
-
-    public String getNumberString() {
-        if (hasSpecifiedDelimiter()) {
-            return numbers.split("\n", 2)[1];
-        }
-        return numbers;
     }
     
     public List<Integer> getNumbersSmallerThan1001() {
         List<Integer> numbers = new LinkedList<Integer>();
-        if (!getNumberString().isEmpty()) {
-            String delimiterPattern = "";
-            if (hasSpecifiedDelimiter()) {
-                Set<String> delimiters = getSpecifiedDelimiters();
-                delimiterPattern = getDelimiterPattern(delimiters);
-            } else {
-                delimiterPattern = StringCalculator.DELIMITER_DEFAULT_PATTERN;
-            }
-            for (String number : getNumberString().split(delimiterPattern)) {
-                int num = Integer.valueOf(number);
-                if (num < 1001) {
-                    numbers.add(num);
-                }
-            }
+        String numberString = getNumberString();
+        if (!numberString.isEmpty()) {
+            String splitPattern = getSplitPatternForNumberString();
+            numbers = getNumbersSmallerThanThreshold(numberString.split(splitPattern), 1001);
         }
         return numbers;
     }
@@ -87,20 +54,64 @@ public class NumberExtractor {
         return negativeNumbers;
     }
     
-    private String getDelimiterPattern(Set<String> delimiters) {
-        StringBuffer delimiterPattern = new StringBuffer();
-        for (String delimiter : delimiters) {
-            delimiterPattern.append(getEscapedPattern(delimiter));
-            delimiterPattern.append("+|");
+    protected String getNumberString() {
+        if (hasSpecifiedDelimiter()) {
+            return numbers.split(NEW_LINE, 2)[1]; // split by first occurrence of '\n'
         }
-        return delimiterPattern.substring(0, delimiterPattern.length() - 1);
+        return numbers;
+    }
+    
+    private List<Integer> getNumbersSmallerThanThreshold(String [] numbers, int threshold) {
+        List<Integer> result = new LinkedList<Integer>();
+        for (String number : numbers) {
+            int value = Integer.valueOf(number);
+            if (value < threshold) {
+                result.add(value);
+            }
+        }
+        return result;
+    }
+    
+    private String getSplitPatternForNumberString() {
+        String splitPattern = "";
+        if (hasSpecifiedDelimiter()) {
+            Set<String> delimiters = getSpecifiedDelimiters();
+            splitPattern = getSplitPattern(delimiters);
+        } else {
+            splitPattern = StringCalculator.DEFAULT_SPLIT_PATTERN;
+        }
+        return splitPattern;
+    }
+    
+    private Set<String> getDelimiters(String delimiterString) {
+        Set<String> delimiters = new HashSet<String>();
+        if (delimiterString.startsWith(DELIMITER_SPECIFICATION_EXTENDED_PREFIX)) {
+            Pattern pattern = Pattern.compile(DELIMITER_SPECFICIATION_EXTENDED_PATTERN);
+            Matcher matcher = pattern.matcher(delimiterString);
+            while (matcher.find()) {
+                delimiters.add(matcher.group(1));
+            }
+        } else {
+            delimiters.add(delimiterString.substring(DELIMITER_SPECIFICATION_PREFIX.length()));
+        }
+        return delimiters;
+    }
+    
+    private String getSplitPattern(Set<String> delimiters) {
+        StringBuffer splitPattern = new StringBuffer();
+        for (String delimiter : delimiters) {
+            splitPattern.append(getEscapedPattern(delimiter));
+            splitPattern.append("+|");
+        }
+        return splitPattern.substring(0, splitPattern.length() - 1);
     }
 
     private String getEscapedPattern(String pattern) {
         StringBuffer escapedPattern = new StringBuffer();
         for (int i = 0; i < pattern.length(); i++) {
             char singleDelimiter = pattern.charAt(i);
-            escapedPattern.append("\\" + String.valueOf(singleDelimiter));
+            escapedPattern.append(ESCAPE_CHARACTER_PATTERN);
+            escapedPattern.append(String.valueOf(singleDelimiter));
         }
         return escapedPattern.toString();
     }
