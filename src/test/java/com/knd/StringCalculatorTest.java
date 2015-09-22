@@ -81,7 +81,7 @@ public class StringCalculatorTest {
         try {
             calculator.add("//;\n-1;-2;3;4;-5");
         } catch (NegativeValueException exception) {
-            assertThat(exception.getMessage()).isEqualTo("-1; -2; -5" + " are not allowed");
+            assertThat(exception.getMessage()).isEqualTo("-1, -2, -5" + " are not allowed");
         }
     }
 
