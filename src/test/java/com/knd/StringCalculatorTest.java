@@ -108,6 +108,12 @@ public class StringCalculatorTest {
         int sum = calculator.add("//[*%;]\n1*%;2*%;3");
         assertThat(sum).isEqualTo(6);
     }
+    
+    @Test
+    public void testCalculatorSummationSupportsMixedSpecifiedDelimiterWithoutSquareBrackets() throws NegativeValueException {
+        int sum = calculator.add("//*%;\n1*%;2*%;3");
+        assertThat(sum).isEqualTo(6);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
