@@ -7,6 +7,9 @@ import java.util.Random;
 import org.junit.Test;
 
 public class StringCalculatorTest {
+    
+    private static final String COMMA = ",";
+    private static final String NEW_LINE = "\n";
 
     StringCalculator calculator = new StringCalculator();
 
@@ -61,6 +64,12 @@ public class StringCalculatorTest {
         int sum = calculator.add("//;\n1;2");
         assertThat(sum).isEqualTo(3);
     }
+    
+    @Test
+    public void testCalculatorSummationForSpecifiedDelimiterNumberString1() {
+        int sum = calculator.add("//:\n1:2");
+        assertThat(sum).isEqualTo(3);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
@@ -68,9 +77,9 @@ public class StringCalculatorTest {
             numbers.append(String.valueOf(i));
             if (i < amountOfNumbers - 1) { // not next to last element
                 if (i % 2 == 0) {
-                    numbers.append(StringCalculator.COMMA_DELIMETER);
+                    numbers.append(COMMA);
                 } else {
-                    numbers.append(StringCalculator.NEW_LINE_DELIMETER);
+                    numbers.append(NEW_LINE);
                 }
             }
         }

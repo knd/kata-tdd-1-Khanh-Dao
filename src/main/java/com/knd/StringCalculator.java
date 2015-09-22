@@ -1,28 +1,19 @@
 package com.knd;
 
 public class StringCalculator {
-    
-    public static final String COMMA_DELIMETER = ",";
-    public static final String NEW_LINE_DELIMETER = "\n";
+
+    public static final String DELIMITER_DEFAULT_PATTERN = ",|\n";
 
     public int add(String numbers) {
         NumberExtractor extractor = new NumberExtractor(numbers);
+        String numberString = extractor.getNumberString();
+        if (numberString.isEmpty()) {
+            return 0;
+        }
         int sum = 0;
-        if (extractor.hasSpecifiedDelimiter()) {
-            String delimiter = extractor.getSpecifiedDelimiter();
-            String numberString = extractor.getNumberString();         
-            for (String number : numberString.split(delimiter)) {
-                sum += Integer.valueOf(number);
-            }
-        } else {
-            if (numbers.isEmpty()) {
-                return 0;
-            }
-            for (String commaSplittedNumber : numbers.split(COMMA_DELIMETER)) {
-                for (String newLineSplittedNumber : commaSplittedNumber.split(NEW_LINE_DELIMETER)) {
-                    sum += Integer.valueOf(newLineSplittedNumber);
-                }
-            }
+        String delimiterPattern = extractor.hasSpecifiedDelimiter() ? extractor.getSpecifiedDelimiter() : DELIMITER_DEFAULT_PATTERN;
+        for (String number : numberString.split(delimiterPattern)) {
+            sum += Integer.valueOf(number);
         }
         return sum;
     }
