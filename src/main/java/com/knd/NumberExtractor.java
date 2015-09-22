@@ -21,14 +21,20 @@ public class NumberExtractor {
 
     public String getSpecifiedDelimiter() {
         if (hasSpecifiedDelimiter()) {
-            return String.valueOf(numbers.charAt(SPECIFIED_DELIMITER_INDEX));
+            String firstLine = numbers.split("\n")[0];
+            if (firstLine.startsWith("//[")) {
+                return firstLine.substring(3, firstLine.length() - 1);
+            }
+            if (firstLine.startsWith("//")) {
+                return String.valueOf(firstLine.charAt(SPECIFIED_DELIMITER_INDEX));
+            }
         }
         return null;
     }
 
     public String getNumberString() {
         if (hasSpecifiedDelimiter()) {
-            return numbers.substring(SPECIFIED_DELIMITER_INDEX + NEW_LINE_STR_LENGTH);
+            return numbers.split("\n", 2)[1];
         }
         return numbers;
     }
@@ -56,7 +62,7 @@ public class NumberExtractor {
         }
         return negativeNumbers;
     }
-    
+
     private String getEscapedPattern(String pattern) {
         return "\\" + pattern;
     }
