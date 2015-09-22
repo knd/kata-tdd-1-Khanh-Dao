@@ -3,6 +3,7 @@ package com.knd;
 public class NumberExtractor {
 
     private static final String DELIMITER_PREFIX = "//";
+    private static final int SPECIFIED_DELIMITER_INDEX = 2;
 
     private String numbers;
 
@@ -15,7 +16,7 @@ public class NumberExtractor {
     }
 
     public String getSpecifiedDelimiter() {
-        return String.valueOf(numbers.charAt(2));
+        return String.valueOf(numbers.charAt(SPECIFIED_DELIMITER_INDEX));
     }
 
 }
