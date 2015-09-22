@@ -1,14 +1,15 @@
 package com.knd;
 
 public class NumberExtractor {
+    
+    private String numbers;
 
     public NumberExtractor(String numbers) {
-
+        this.numbers = numbers;
     }
 
     public boolean hasSpecifiedDelimiter() {
-        // TODO Auto-generated method stub
-        return true;
+        return numbers.startsWith("//");
     }
 
 }
