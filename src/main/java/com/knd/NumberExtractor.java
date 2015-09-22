@@ -24,7 +24,10 @@ public class NumberExtractor {
     }
 
     public String getNumberString() {
-        return numbers.substring(SPECIFIED_DELIMITER_INDEX + NEW_LINE.length());
+        if (hasSpecifiedDelimiter()) {
+            return numbers.substring(SPECIFIED_DELIMITER_INDEX + NEW_LINE.length());
+        } 
+        return numbers;
     }
 
 }
