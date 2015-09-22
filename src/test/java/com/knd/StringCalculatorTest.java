@@ -120,6 +120,12 @@ public class StringCalculatorTest {
         int sum = calculator.add("//[*][%]\n1*2%3");
         assertThat(sum).isEqualTo(6);
     }
+    
+    @Test
+    public void testCalculatorSummationSupportsDifferentSpecifiedDelimiters1() throws NegativeValueException {
+        int sum = calculator.add("//[%,,*][%,*][;;][%,**][**]\n1%,,*2%,*3;;4%,**5**6");
+        assertThat(sum).isEqualTo(21);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
