@@ -38,7 +38,10 @@ public class NumberExtractor {
         if (!getNumberString().isEmpty()) {
             String delimiterPattern = hasSpecifiedDelimiter() ? getSpecifiedDelimiter() : StringCalculator.DELIMITER_DEFAULT_PATTERN;
             for (String number : getNumberString().split(delimiterPattern)) {
-                numbers.add(Integer.valueOf(number));
+                int num = Integer.valueOf(number);
+                if (num < 1001) {
+                    numbers.add(num);
+                }
             }
         }
         return numbers;
