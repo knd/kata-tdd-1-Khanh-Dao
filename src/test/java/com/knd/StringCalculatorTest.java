@@ -96,6 +96,12 @@ public class StringCalculatorTest {
         int sum = calculator.add("//;\n1000;10001;999;1002");
         assertThat(sum).isEqualTo(1999);       
     }
+    
+    @Test
+    public void testCalculatorSummationSupportsSpecifiedDelimiterInsideSquareBrackets() throws NegativeValueException {
+        int sum = calculator.add("//[*]\n1*2*3");
+        assertThat(sum).isEqualTo(6);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
