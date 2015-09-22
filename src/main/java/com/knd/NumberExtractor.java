@@ -43,6 +43,9 @@ public class NumberExtractor {
             while (matcher.find()) {
                 delimiters.add(matcher.group(1));
             }
+            if (delimiters.isEmpty()) {
+                delimiters.add(firstLine.substring(DELIMITER_PREFIX.length(), firstLine.length()));
+            }
         }
         return delimiters;
     }
@@ -54,7 +57,7 @@ public class NumberExtractor {
         return numbers;
     }
     
-    public List<Integer> getNumbers1() {
+    public List<Integer> getNumbersSmallerThan1001() {
         List<Integer> numbers = new LinkedList<Integer>();
         if (!getNumberString().isEmpty()) {
             String delimiterPattern = "";
@@ -64,21 +67,6 @@ public class NumberExtractor {
             } else {
                 delimiterPattern = StringCalculator.DELIMITER_DEFAULT_PATTERN;
             }
-            for (String number : getNumberString().split(delimiterPattern)) {
-                int num = Integer.valueOf(number);
-                if (num < 1001) {
-                    numbers.add(num);
-                }
-            }
-        }
-        return numbers;
-    }
-
-    public List<Integer> getNumbersSmallerThan1001() {
-        List<Integer> numbers = new LinkedList<Integer>();
-        if (!getNumberString().isEmpty()) {
-            String delimiterPattern =
-                    hasSpecifiedDelimiter() ? getEscapedPattern(getSpecifiedDelimiter()) : StringCalculator.DELIMITER_DEFAULT_PATTERN;
             for (String number : getNumberString().split(delimiterPattern)) {
                 int num = Integer.valueOf(number);
                 if (num < 1001) {

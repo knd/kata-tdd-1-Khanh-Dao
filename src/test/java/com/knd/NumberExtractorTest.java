@@ -137,21 +137,21 @@ public class NumberExtractorTest {
     @Test
     public void testExtractorReturnsListOfNumbersWithDifferentSpecifiedDelimiters() {
         NumberExtractor extractor = new NumberExtractor("//[*][%]\n1*2%3");
-        List<Integer> numbers = extractor.getNumbers1();
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
         assertThat(numbers).containsOnly(1, 2, 3);
     }
     
     @Test
     public void testExtractorReturnsListOfNumbersWithDifferentSpecifiedDelimiters1() {
         NumberExtractor extractor = new NumberExtractor("//[*][**]\n1**2*3");
-        List<Integer> numbers = extractor.getNumbers1();
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
         assertThat(numbers).containsOnly(1, 2, 3);
     }
     
     @Test
     public void testExtractorReturnsListOfNumbersWithDifferentSpecifiedDelimiters2() {
         NumberExtractor extractor = new NumberExtractor("//[%,,*][%,*][;;][%,**][**]\n1%,,*2%,*3;;4%,**5**6");
-        List<Integer> numbers = extractor.getNumbers1();
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
         assertThat(numbers).containsOnly(1, 2, 3, 4, 5, 6);
     }
     
