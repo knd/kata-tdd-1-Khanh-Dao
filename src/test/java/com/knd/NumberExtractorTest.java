@@ -3,6 +3,7 @@ package com.knd;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -131,6 +132,13 @@ public class NumberExtractorTest {
         NumberExtractor extractor = new NumberExtractor("//***%;*\n1***%;*2***%;*3");
         List<Integer> numbers = extractor.getNumbersSmallerThan1001();
         assertThat(numbers).containsOnly(1, 2, 3);
+    }
+    
+    @Test
+    public void testExtractorReturnsSetOfUniqueDelimiters() {
+        NumberExtractor extractor = new NumberExtractor("//[*][%]\n1*2%3");
+        Set<String> delimiters = extractor.getSpecifiedDelimiters();
+        assertThat(delimiters).containsOnly("*", "%");
     }
     
 }
