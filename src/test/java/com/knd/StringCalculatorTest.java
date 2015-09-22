@@ -84,6 +84,12 @@ public class StringCalculatorTest {
             assertThat(exception.getMessage()).isEqualTo("-1, -2, -5" + " are not allowed");
         }
     }
+    
+    @Test
+    public void testCalculatorSummationIgnoringNumbersGreatherThan1000() throws NegativeValueException {
+        int sum = calculator.add("1\n1001,2,3");
+        assertThat(sum).isEqualTo(6);
+    }
 
     private String getNumbersInputString(int amountOfNumbers) {
         StringBuffer numbers = new StringBuffer();
