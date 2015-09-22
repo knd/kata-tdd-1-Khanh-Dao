@@ -73,21 +73,21 @@ public class NumberExtractorTest {
     @Test 
     public void testExtractorReturnsListOfNumbers() {
         NumberExtractor extractor = new NumberExtractor("//;\n-1;-2;3;-4");
-        List<Integer> numbers = extractor.getNumbers();
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
         assertThat(numbers).containsOnly(-1, -2, 3, -4);
     }
     
     @Test
     public void testExtractorReturnsEmptyListOfNumbersForEmptyNumberString() {
         NumberExtractor extractor = new NumberExtractor("");
-        List<Integer> numbers = extractor.getNumbers();
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
         assertThat(numbers).isEmpty();
     }
     
     @Test
-    public void testExtractorReturnsListOfNumbersSmallerThanOrEqualTo1000() {
+    public void testExtractorReturnsListOfNumbersSmallerThan1001() {
         NumberExtractor extractor = new NumberExtractor("1\n1001,2,3");
-        List<Integer> numbers = extractor.getNumbers();
+        List<Integer> numbers = extractor.getNumbersSmallerThan1001();
         assertThat(numbers).containsOnly(1, 2, 3);
     }
     

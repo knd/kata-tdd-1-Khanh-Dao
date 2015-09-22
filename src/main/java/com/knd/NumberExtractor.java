@@ -33,7 +33,7 @@ public class NumberExtractor {
         return numbers;
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getNumbersSmallerThan1001() {
         List<Integer> numbers = new LinkedList<Integer>();
         if (!getNumberString().isEmpty()) {
             String delimiterPattern = hasSpecifiedDelimiter() ? getSpecifiedDelimiter() : StringCalculator.DELIMITER_DEFAULT_PATTERN;
@@ -49,7 +49,7 @@ public class NumberExtractor {
 
     public List<Integer> getNegativeNumbers() {
         List<Integer> negativeNumbers = new LinkedList<Integer>();
-        for (Integer number : getNumbers()) {
+        for (Integer number : getNumbersSmallerThan1001()) {
             if (number < 0) {
                 negativeNumbers.add(number);
             }

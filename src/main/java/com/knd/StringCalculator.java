@@ -13,7 +13,7 @@ public class StringCalculator {
             throw new NegativeValueException(negativeNumbers);
         }
         int sum = 0;
-        for (Integer number : extractor.getNumbers()) {
+        for (Integer number : extractor.getNumbersSmallerThan1001()) {
             sum += number;
         }
         return sum;

@@ -86,9 +86,15 @@ public class StringCalculatorTest {
     }
     
     @Test
-    public void testCalculatorSummationIgnoringNumbersGreatherThan1000() throws NegativeValueException {
+    public void testCalculatorSummationOnlyForNumbersSmallerThan1001() throws NegativeValueException {
         int sum = calculator.add("1\n1001,2,3");
         assertThat(sum).isEqualTo(6);
+    }
+    
+    @Test
+    public void testCalculatorSummationOnlyForNumbersSmallerThan1001A() throws NegativeValueException {
+        int sum = calculator.add("//;\n1000;10001;999;1002");
+        assertThat(sum).isEqualTo(1999);       
     }
 
     private String getNumbersInputString(int amountOfNumbers) {
