@@ -148,4 +148,11 @@ public class NumberExtractorTest {
         assertThat(numbers).containsOnly(1, 2, 3);
     }
     
+    @Test
+    public void testExtractorReturnsListOfNumbersWithDifferentSpecifiedDelimiters1() {
+        NumberExtractor extractor = new NumberExtractor("//[*][**]\n1**2*3");
+        List<Integer> numbers = extractor.getNumbers1();
+        assertThat(numbers).containsOnly(1, 2, 3);
+    }
+    
 }
