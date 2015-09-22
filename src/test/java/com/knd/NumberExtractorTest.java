@@ -54,4 +54,10 @@ public class NumberExtractorTest {
         assertThat(extractor.getNumberString()).isEmpty();
     }
     
+    @Test
+    public void testExtractorReturnsListOfNegativeNumbers() {
+        NumberExtractor extractor = new NumberExtractor("-1");
+        assertThat(extractor.getNegativeNumbers()).hasSize(1);
+    }
+    
 }
