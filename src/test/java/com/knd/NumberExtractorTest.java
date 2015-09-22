@@ -48,4 +48,10 @@ public class NumberExtractorTest {
         assertThat(extractor.getNumberString()).isEqualTo("1\n2;3");
     }
     
+    @Test
+    public void testExtractorReturnsNumberStringAsEmptyString() {
+        NumberExtractor extractor = new NumberExtractor("//;\n");
+        assertThat(extractor.getNumberString()).isEmpty();
+    }
+    
 }
