@@ -25,7 +25,7 @@ public class NumberExtractor {
                 return firstLine.substring(3, firstLine.length() - 1);
             }
             if (firstLine.startsWith("//")) {
-                return String.valueOf(firstLine.charAt(SPECIFIED_DELIMITER_INDEX));
+                return firstLine.substring(DELIMITER_PREFIX.length());
             }
         }
         return null;
