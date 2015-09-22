@@ -103,7 +103,7 @@ public class NumberExtractor {
         StringBuffer delimiterPattern = new StringBuffer();
         for (String delimiter : delimiters) {
             delimiterPattern.append(getEscapedPattern(delimiter));
-            delimiterPattern.append("|");
+            delimiterPattern.append("+|");
         }
         return delimiterPattern.substring(0, delimiterPattern.length() - 1);
     }
