@@ -162,9 +162,15 @@ public class NumberExtractorTest {
     }
     
     @Test
-    public void testExtractorCreatesDelimitedNumberExtractorInstance() {
+    public void testExtractorCreatesDelimiterNumberExtractorInstance() {
         NumberExtractor extractor = NumberExtractor.create("//;\n1;2;3");
         assertThat(extractor).isInstanceOf(DelimiterNumberExtractor.class);
+    }
+    
+    @Test
+    public void testExtractorCreatesExtendedDelimiterNumberExtractorInstance() {
+        NumberExtractor extractor = NumberExtractor.create("//[;]\n1;2;3");
+        assertThat(extractor).isInstanceOf(ExtendedDelimiterNumberExtractor.class);
     }
     
 }
