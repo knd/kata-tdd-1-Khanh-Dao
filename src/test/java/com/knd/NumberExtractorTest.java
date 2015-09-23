@@ -155,4 +155,10 @@ public class NumberExtractorTest {
         assertThat(numbers).containsOnly(1, 2, 3, 4, 5, 6);
     }
     
+    @Test
+    public void testExtractorCreatesDefaultNumberExtractorInstance() {
+        NumberExtractor extractor = NumberExtractor.create("1\n2;3");
+        assertThat(extractor).isInstanceOf(DefaultNumberExtractor.class);
+    }
+    
 }
