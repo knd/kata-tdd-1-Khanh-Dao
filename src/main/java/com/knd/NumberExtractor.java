@@ -116,4 +116,9 @@ public class NumberExtractor {
         return escapedPattern.toString();
     }
 
+    public static NumberExtractor create(String string) {
+        // TODO Auto-generated method stub
+        return new DefaultNumberExtractor(string);
+    }
+
 }
