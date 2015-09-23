@@ -161,4 +161,10 @@ public class NumberExtractorTest {
         assertThat(extractor).isInstanceOf(DefaultNumberExtractor.class);
     }
     
+    @Test
+    public void testExtractorCreatesDelimitedNumberExtractorInstance() {
+        NumberExtractor extractor = NumberExtractor.create("//;\n1;2;3");
+        assertThat(extractor).isInstanceOf(DelimiterNumberExtractor.class);
+    }
+    
 }
