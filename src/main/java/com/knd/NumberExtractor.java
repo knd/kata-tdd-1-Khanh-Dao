@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberExtractor {
+public abstract class NumberExtractor {
 
     private static final String DELIMITER_SPECIFICATION_PREFIX = "//";
     private static final String DELIMITER_SPECIFICATION_EXTENDED_PREFIX = "//[";
@@ -15,7 +15,16 @@ public class NumberExtractor {
     private static final String NEW_LINE = "\n";
     private static final String ESCAPE_CHARACTER_PATTERN = "\\";
 
-    private String numbers;
+    protected String numbers;
+    
+    public static NumberExtractor create(String numbers) {
+        if (numbers.startsWith(DELIMITER_SPECIFICATION_EXTENDED_PREFIX)) {
+            return new ExtendedDelimiterNumberExtractor(numbers);
+        } else if (numbers.startsWith(DELIMITER_SPECIFICATION_PREFIX)) {
+            return new DelimiterNumberExtractor(numbers);
+        }
+        return new DefaultNumberExtractor(numbers);
+    }
 
     public NumberExtractor(String numbers) {
         this.numbers = numbers;
@@ -34,17 +43,9 @@ public class NumberExtractor {
         return delimiters;
     }
     
-    public List<Integer> getNumbersSmallerThan1001() {
-        List<Integer> numbers = new LinkedList<Integer>();
-        String numberString = getNumberString();
-        if (!numberString.isEmpty()) {
-            String splitPattern = getSplitPatternForNumberString();
-            numbers = getNumbersSmallerThanThreshold(numberString.split(splitPattern), 1001);
-        }
-        return numbers;
-    }
+    public abstract List<Integer> getNumbersSmallerThan1001();
 
-    public List<Integer> getNegativeNumbers() {
+    protected List<Integer> getNegativeNumbers() {
         List<Integer> negativeNumbers = new LinkedList<Integer>();
         for (Integer number : getNumbersSmallerThan1001()) {
             if (number < 0) {
@@ -61,7 +62,7 @@ public class NumberExtractor {
         return numbers;
     }
     
-    private List<Integer> getNumbersSmallerThanThreshold(String [] numbers, int threshold) {
+    protected List<Integer> getNumbersSmallerThanThreshold(String [] numbers, int threshold) {
         List<Integer> result = new LinkedList<Integer>();
         for (String number : numbers) {
             int value = Integer.valueOf(number);
@@ -72,7 +73,7 @@ public class NumberExtractor {
         return result;
     }
     
-    private String getSplitPatternForNumberString() {
+    protected String getSplitPatternForNumberString() {
         String splitPattern = "";
         if (hasSpecifiedDelimiter()) {
             Set<String> delimiters = getSpecifiedDelimiters();
@@ -114,15 +115,6 @@ public class NumberExtractor {
             escapedPattern.append(String.valueOf(singleDelimiter));
         }
         return escapedPattern.toString();
-    }
-
-    public static NumberExtractor create(String numbers) {
-        if (numbers.startsWith(DELIMITER_SPECIFICATION_EXTENDED_PREFIX)) {
-            return new ExtendedDelimiterNumberExtractor(numbers);
-        } else if (numbers.startsWith(DELIMITER_SPECIFICATION_PREFIX)) {
-            return new DelimiterNumberExtractor(numbers);
-        }
-        return new DefaultNumberExtractor(numbers);
     }
 
 }
