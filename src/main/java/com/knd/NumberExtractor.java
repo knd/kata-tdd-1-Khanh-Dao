@@ -117,6 +117,9 @@ public class NumberExtractor {
     }
 
     public static NumberExtractor create(String numbers) {
+        if (numbers.startsWith(DELIMITER_SPECIFICATION_PREFIX)) {
+            return new DelimiterNumberExtractor(numbers);
+        }
         return new DefaultNumberExtractor(numbers);
     }
 
